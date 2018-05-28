@@ -13,7 +13,6 @@ environment:
   # Tell msys2 to inherit the current directory when starting the shell
   CHERE_INVOKING: 1
   matrix:
-    - BUILD_TYPE: msvc
     - BUILD_TYPE: mingw
 
 platform:
@@ -53,7 +52,7 @@ build_script:
           # https://www.appveyor.com/docs/build-phase
           msbuild msvc_build/yuzu.sln /maxcpucount /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
         } else {
-          C:\msys64\usr\bin\bash.exe -lc 'mingw32-make -C mingw_build/ 2>&1'
+          C:\msys64\usr\bin\bash.exe -lc 'find externals/unicorn -type f && mingw32-make -C mingw_build/ 2>&1'
         }
 
 after_build:
