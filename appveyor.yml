@@ -13,7 +13,6 @@ environment:
   # Tell msys2 to inherit the current directory when starting the shell
   CHERE_INVOKING: 1
   matrix:
-    - BUILD_TYPE: msvc
     - BUILD_TYPE: mingw
 
 platform:
@@ -28,7 +27,8 @@ install:
         if ($env:BUILD_TYPE -eq 'mingw') {
           $dependencies = "mingw64/mingw-w64-x86_64-cmake",
                           "mingw64/mingw-w64-x86_64-qt5",
-                          "mingw64/mingw-w64-x86_64-SDL2"
+                          "mingw64/mingw-w64-x86_64-SDL2",
+                          "mingw64/mingw-w64-x86_64-ninja"
           # redirect err to null to prevent warnings from becoming errors
           # workaround to prevent pacman from failing due to cyclical dependencies
           C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw64/mingw-w64-x86_64-freetype mingw64/mingw-w64-x86_64-fontconfig" 2> $null
@@ -43,7 +43,7 @@ before_build:
           # redirect stderr and change the exit code to prevent powershell from cancelling the build if cmake prints a warning
           cmd /C 'cmake -G "Visual Studio 15 2017 Win64" -DYUZU_USE_BUNDLED_QT=1 -DYUZU_USE_BUNDLED_SDL2=1 -DYUZU_USE_BUNDLED_UNICORN=1 .. 2>&1 && exit 0'
         } else {
-          C:\msys64\usr\bin\bash.exe -lc "cmake -G 'MSYS Makefiles' -DYUZU_BUILD_UNICORN=1 -DCMAKE_BUILD_TYPE=Release .. 2>&1"
+          C:\msys64\usr\bin\bash.exe -lc "cmake -G 'Ninja' -DYUZU_BUILD_UNICORN=1 -DCMAKE_BUILD_TYPE=Release .. 2>&1"
         }
   - cd ..
 
@@ -53,7 +53,7 @@ build_script:
           # https://www.appveyor.com/docs/build-phase
           msbuild msvc_build/yuzu.sln /maxcpucount /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
         } else {
-          C:\msys64\usr\bin\bash.exe -lc 'mingw32-make -C mingw_build/ 2>&1'
+          C:\msys64\usr\bin\bash.exe -lc 'mingw32-ninja -C mingw_build/ 2>&1'
         }
 
 after_build:
