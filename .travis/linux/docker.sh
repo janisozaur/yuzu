@@ -11,6 +11,6 @@ cd /yuzu
 
 mkdir build && cd build
 cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release -G Ninja
-ninja
+time ninja
 
 ctest -VV -C Release
