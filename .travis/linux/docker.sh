@@ -11,6 +11,6 @@ cd /yuzu
 
 mkdir build && cd build
 cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release
-make -j4
+time make -j4
 
 ctest -VV -C Release
