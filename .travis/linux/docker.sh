@@ -6,6 +6,8 @@ apt-get install -y build-essential git libqt5opengl5-dev libsdl2-dev libssl-dev 
 cd /yuzu
 
 export PATH=/usr/lib/ccache:$PATH
+ln -sf /usr/bin/ccache /usr/bin/cc
+ln -sf /usr/bin/ccache /usr/bin/c++
 mkdir build && cd build
 ccache --show-stats > ccache_before
 cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release
