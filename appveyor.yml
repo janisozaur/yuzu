@@ -41,6 +41,9 @@ before_build:
   - 7z x ninja.zip -oC:\projects\deps\ninja > nul
   - set PATH=C:\projects\deps\ninja;%PATH%
   - ninja --version
+  
+  - set PATH="C:\Program Files\LLVM\bin";%PATH%
+  - clang-cl -v
 
   - mkdir %BUILD_TYPE%_build
   - cd %BUILD_TYPE%_build
@@ -48,7 +51,7 @@ before_build:
         if ($env:BUILD_TYPE -eq 'msvc') {
           # redirect stderr and change the exit code to prevent powershell from cancelling the build if cmake prints a warning
           cmd /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64'
-          cmd /C 'cmake -G "Ninja" -DYUZU_USE_BUNDLED_QT=1 -DYUZU_USE_BUNDLED_SDL2=1 -DYUZU_USE_BUNDLED_UNICORN=1 .. 2>&1 && exit 0'
+          cmd /C 'cmake -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DYUZU_USE_BUNDLED_QT=1 -DYUZU_USE_BUNDLED_SDL2=1 -DYUZU_USE_BUNDLED_UNICORN=1 .. 2>&1 && exit 0'
         } else {
           C:\msys64\usr\bin\bash.exe -lc "cmake -G 'MSYS Makefiles' -DYUZU_BUILD_UNICORN=1 -DCMAKE_BUILD_TYPE=Release .. 2>&1"
         }
