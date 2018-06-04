@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 apt-get update
-apt-get install -y build-essential git libqt5opengl5-dev libsdl2-dev libssl-dev python qtbase5-dev wget ccache
+apt-get install -y build-essential git libqt5opengl5-dev libsdl2-dev libssl-dev python qtbase5-dev wget ccache cmake
 
 cd /yuzu
 
