@@ -6,9 +6,9 @@ export MACOSX_DEPLOYMENT_TARGET=10.12
 export Qt5_DIR=$(brew --prefix)/opt/qt5
 export UNICORNDIR=$(pwd)/externals/unicorn
 
-ls /opt/libexec
+ls /usr/local/opt/ccache/libexec
 mkdir build && cd build
-export PATH=/opt/libexec:$PATH
+export PATH=/usr/local/opt/ccache/libexec:$PATH
 ccache --show-stats > ccache_before
 cmake --version
 cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release
