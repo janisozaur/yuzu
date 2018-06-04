@@ -8,7 +8,7 @@ export UNICORNDIR=$(pwd)/externals/unicorn
 
 mkdir build && cd build
 cmake --version
-cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release
-make -j4
+cmake .. -DYUZU_BUILD_UNICORN=ON -DCMAKE_BUILD_TYPE=Release -G Ninja
+ninja
 
 ctest -VV -C Release
