@@ -80,7 +80,7 @@ after_build:
           $env:BUILD_SYMBOLS = $MSVC_BUILD_PDB
           $env:BUILD_UPDATE = $MSVC_SEVENZIP
 
-          $BUILD_DIR = ".\msvc_build\bin\Release"
+          $BUILD_DIR = ".\msvc_build\bin\"
 
           # Make a debug symbol upload
           mkdir pdb
