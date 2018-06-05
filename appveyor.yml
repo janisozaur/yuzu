@@ -63,6 +63,8 @@ build_script:
   - ps: |
         if ($env:BUILD_TYPE -eq 'msvc') {
           # https://www.appveyor.com/docs/build-phase
+          appveyor PushArtifact build.ninja
+          appveyor PushArtifact rules.ninja
           ninja -C msvc_build
           echo done
           ninja -C msvc_build -v yuzu yuzu-cmd
