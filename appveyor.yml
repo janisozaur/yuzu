@@ -14,7 +14,6 @@ environment:
   CHERE_INVOKING: 1
   matrix:
     - BUILD_TYPE: msvc
-    - BUILD_TYPE: mingw
 
 platform:
   - x64
@@ -52,6 +51,7 @@ build_script:
         if ($env:BUILD_TYPE -eq 'msvc') {
           # https://www.appveyor.com/docs/build-phase
           msbuild msvc_build/yuzu.sln /maxcpucount /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+          tree /A /F
         } else {
           C:\msys64\usr\bin\bash.exe -lc 'mingw32-make -C mingw_build/ 2>&1'
         }
