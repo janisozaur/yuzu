@@ -63,6 +63,8 @@ build_script:
         if ($env:BUILD_TYPE -eq 'msvc') {
           # https://www.appveyor.com/docs/build-phase
           ninja -C msvc_build
+          echo done
+          ninja -C msvc_build -v install
         } else {
           C:\msys64\usr\bin\bash.exe -lc 'mingw32-make -C mingw_build/ 2>&1'
         }
