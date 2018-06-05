@@ -65,7 +65,7 @@ build_script:
           # https://www.appveyor.com/docs/build-phase
           appveyor PushArtifact msvc_build/build.ninja
           appveyor PushArtifact msvc_build/rules.ninja
-          ninja -C msvc_build
+          ninja -v -C msvc_build
           echo done
           ninja -C msvc_build -v yuzu yuzu-cmd
           tree /A /F
