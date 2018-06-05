@@ -25,7 +25,7 @@ function(windows_copy_files TARGET SOURCE_DIR DEST_DIR)
         COMMAND echo here1
         COMMAND ${CMAKE_COMMAND} -E make_directory ${DEST_DIR}
 	COMMAND echo here2
-        COMMAND robocopy ${SOURCE_DIR} ${DEST_DIR} ${ARGN}
+        COMMAND robocopy ${SOURCE_DIR} ${DEST_DIR} ${ARGN} /NJH /NJS /NDL /NFL /NC /NS /NP || cmd /c "exit /b 0"
 	COMMAND echo here3
     )
 endfunction()
